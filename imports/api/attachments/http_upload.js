@@ -47,12 +47,13 @@ if (Meteor.isServer) {
             Attachments.write(_readData, _addFileMeta, function (_uploadError, _uploadData) {
               if (_uploadError) {
                 console.log(_uploadError);
+                res.end();
               } else {
                 fs.unlink(attachment.path); // remove temp upload
                 res.writeHead(200);
                 res.end(JSON.stringify({success: true}));
               }
-            });
+            },true);
           }
         });
       });
